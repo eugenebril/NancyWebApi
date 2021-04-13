@@ -29,8 +29,8 @@ namespace NyTimesApi.Services
             var response = await _httpClient.GetAsync($"{API_V2}/{section}.json?api-key={_nytSettings.ApiKey}");
             response.EnsureSuccessStatusCode();
             var data = await response.Content.ReadAsStringAsync();
-            var resultWrapper = JsonConvert.DeserializeObject<TopStoriesResponse>(data);
-            return resultWrapper?.Articles ?? Enumerable.Empty<Article>();
+            var topStories = JsonConvert.DeserializeObject<TopStoriesResponse>(data);
+            return topStories?.Articles ?? Enumerable.Empty<Article>();
         }
     }
 }
